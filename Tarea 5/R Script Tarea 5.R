@@ -20,12 +20,17 @@ download.file(url ="http://hmra.gob.do/transparencia/index.php/publicacion-en-el
 #Se importa el archivo excel con los datos.
 archivo <- readxl::read_excel("Estadistica-de-parto-y-nacimiento-xlsx.xlsx")
 
-#Se grafica la grafica de REGRESIÓN LINEAL SIMPLE
+
+#ATENCION CUANDO SE CLONE EL ARCHIVO TAL VEZ DE ERROR PORQUE LA i
+#DE LA VARIABLE "Partos VÃ­a Vaginal" lleva acento y por esto pone un
+#signo de interrogacion solo cambie el ? por una i con acento o sea Ã­.
+
+#Se grafica la grafica de REGRESION LINEAL SIMPLE
 archivo %>%
-  ggplot(aes(x=`Partos Vía Vaginal`,y=Vivos)) + geom_point()+ geom_abline(intercept =67.263 ,slope = 1.863,col = 'blue')+ geom_vline(xintercept = 300, col = "red")
+  ggplot(aes(x=`Partos VÃ­a Vaginal`,y=Vivos)) + geom_point()+ geom_abline(intercept =67.263 ,slope = 1.863,col = 'blue')+ geom_vline(xintercept = 300, col = "red")
 
 #Se hace la regresion
-regresion <- lm(Vivos~ `Partos Vía Vaginal`,data = archivo)
+regresion <- lm(Vivos~ `Partos VÃ­a Vaginal`,data = archivo)
 
 #se obtiene un resumen de la regresion
 summary(regresion)
@@ -39,6 +44,9 @@ residuo <- rstandard(regresion)
 #se obtienen los residuos ajustados
 ajustado <- fitted(regresion)
 
+#Se crea la grafica de ambos
 plot(ajustado,residuo)
+
+#se pone la linea en 0
 abline(h=0)
 
