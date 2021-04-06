@@ -1,1 +1,1 @@
-# Tarea-5-Regresion-Linea
+# Tarea 5 Regresion Lineal Simple
